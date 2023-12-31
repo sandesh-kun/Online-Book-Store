@@ -13,5 +13,9 @@
         <li>{{ cart_item.book.title }} - Quantity: {{ cart_item.quantity }}</li>
         {% endfor %}
     </ul>
+    <form action="{% url 'checkout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Place Order</button>
+    </form>
 </body>
 </html>

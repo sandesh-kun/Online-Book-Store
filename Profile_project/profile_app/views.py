@@ -7,6 +7,7 @@ from .forms import CustomUserCreationForm, CustomAuthenticationForm, AddressForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Exists, OuterRef
 from django.http import HttpResponseBadRequest
+from django.db.models import Q
 
 def home(request):
     books = Book.objects.all()[:5]
@@ -46,10 +47,15 @@ def user_logout(request):
     return redirect('home')
 
 def book_list(request):
-    books = Book.objects.all().annotate(
-        in_cart=Exists(Cart.objects.filter(book=OuterRef('pk'), user=request.user))
-    )
-    return render(request, 'profile_app/book_list.html', {'books': books})
+    query = request.GET.get('q')
+    books = Book.objects.all()
+
+    if query:
+        books = books.filter(
+            Q(title__icontains=query) | Q(author__icontains=query)
+        )
+
+    return render(request, 'profile_app/book_list.html', {'books': books, 'query': query})
 
 @login_required
 def add_to_cart(request, book_id):
@@ -58,8 +64,12 @@ def add_to_cart(request, book_id):
     # Assuming the price is stored in the Book model
     price = book.price
     
-    # Create a new Cart object with the specified price
-    cart_item, created = Cart.objects.get_or_create(user=request.user, book=book, defaults={'price': price})
+    # Create a new Cart object with the specified price and total
+    cart_item, created = Cart.objects.get_or_create(
+        user=request.user,
+        book=book,
+        defaults={'price': price, 'total': price}  # Set the default total to the price
+    )
     
     if not created:
         cart_item.quantity += 1
@@ -115,4 +125,4 @@ def order_history(request):
 
 def order_confirmation(request, order_id):
     order = Order.objects.get(pk=order_id)
-    return render(request, 'profile_app/order_confirmation.html', {'order': order})
+    return render(request, 'profile_app/order_conformation.html', {'order': order})
