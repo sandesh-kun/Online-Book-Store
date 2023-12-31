@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'view_cart' %}">View Cart</a></li>
+        </ul>
+    </nav>
+    <h1>Book List</h1>
+    <ul>
+        {% for book in books %}
+        <li>
+            <img src="{{ book.image.url }}" alt="{{ book.title }} Image" style="width: 100px; height: 100px;">
+            {{ book.title }} by {{ book.author }} - NPR {{ book.price }}
+            {% if user.is_authenticated %}
+                {% if book.in_cart %}
+                    <form action="{% url 'remove_from_cart' cart_item.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">+</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'add_to_cart' book.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">+</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
