@@ -1,0 +1,85 @@
+/* styles.css */
+
+/* Apply general styles to the page */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Style the book details container */
+.book-details {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Style the book title */
+.book-details h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-family: "Lucida Handwriting", cursive;
+}
+
+/* Style the book author */
+.book-details p {
+    margin-bottom: 10px;
+    text-align: justify;
+    text-align-last: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Style the book description */
+.book-details img {
+    max-width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+/* Style the average rating */
+.book-details p.average-rating {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Style the reviews list */
+.reviews {
+    list-style: none;
+    padding: 0;
+}
+
+/* Style each review item */
+.reviews li {
+    margin-bottom: 10px;
+    font-family: "Lucida Handwriting", cursive;
+}
+
+/* Style the form for adding a review */
+.add-review-form {
+    margin-top: 20px;
+}
+
+/* Style the submit button */
+.add-review-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style the login prompt */
+.add-review-form p {
+    margin-top: 10px;
+}
+
+/* Style the login link */
+.add-review-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect for the login link */
+.add-review-form a:hover {
+    text-decoration: underline;
+}

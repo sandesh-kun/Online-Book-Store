@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply a background color and some basic styles to the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the navigation */
+.navigation {
+    background-color: #110f1198;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.navigation-list {
+    list-style-type: none;
+    display: flex;
+    /* justify-content: flex-end; */
+}
+
+.navigation-item {
+    margin-right: 10px;
+    padding-left:20px ;
+    /* border-left: 2px solid #eee7e7; */
+}
+.navigation-item-search {
+    margin-right: 10px;
+    padding-left:800px ;
+    justify-content: flex-end;
+    display: flex;
+}
+.navigation-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation-link:hover {
+    background-color: #555;
+}
+
+/* Style the search form */
+.search-form {
+    display: flex;
+}
+
+.search-input {
+    padding: 5px;
+    flex: 1;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ccc;
+}
+
+.search-button {
+    padding: 5px 10px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #0d3310;
+    background-color: #7e833b;
+    cursor: pointer;
+}
+
+/* Style the headings */
+.main-heading {
+    text-align: center;
+    margin-top: 20px;
+    font-variant: small-caps;
+}
+
+.sub-heading {
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Lucida Handwriting", cursive;
+}
+
+/* Style the book list */
+.book-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-around;
+}
+
+/* Style the book list */
+.book-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-around;
+}
+
+.book-item {
+    position: relative;
+    width: 300px; /* Adjust as needed */
+    height: 300px; /* Adjust as needed */
+    margin: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.book-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.book-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease; /* Add transition for smooth animation */
+}
+
+.book-description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease; /* Add transition for smooth animation */
+    text-align: justify;
+    text-align-last: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.book-item:hover .book-image {
+    transform: translateX(10%); /* Slide the image to the right */
+}
+
+.book-item:hover .book-description {
+    transform: translateX(0); /* Slide the description into view */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navigation-list {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .navigation-item {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-input {
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .search-button {
+        border-radius: 5px;
+    }
+
+    .book-list {
+        justify-content: center;
+    }
+
+    .book-item {
+        margin: 10px;
+    }
+}

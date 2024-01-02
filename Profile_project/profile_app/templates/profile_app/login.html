@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
+    <!-- Include your CSS file for styling -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-    <h1>User Login</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="login">
+        <img src="{% static 'images/login-bg.png' %}" alt="login image" class="login__img">
+        <div class="login-container">
+            <h1>User Login</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+                
+            </form>
+            <div id ="clock"></div>
+        </div>
+    </div>
+    <script src="{% static 'js/clock.js' %}"></script>
+    {% include 'footer.html' %}
 </body>
 </html>

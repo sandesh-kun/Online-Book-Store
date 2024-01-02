@@ -1,0 +1,56 @@
+/* style.css */
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Footer Content */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Contact Info */
+.contact-info h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.contact-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Social Icons */
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-icons img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+}

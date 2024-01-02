@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +6,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 <body>
-    <h1>User Registration</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+    <div class="registration-container">
+        <img src="{% static 'images/login-bg.png' %}" alt="login image" class="login__img">
+        <h1>User Registration</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                {{ form.username }}
+                <small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                {{ form.password1 }}
+                <small>Your password can’t be too similar to your other personal information.</small><br>
+                <small>Your password must contain at least 8 characters.</small><br>
+                <small>Your password can’t be a commonly used password.</small><br>
+                <small>Your password can’t be entirely numeric.</small>
+            </div>
+            <div class="form-group">
+                <label for="id_password_confirm">Password confirmation:</label>
+                {{ form.password2 }}
+                <small>Enter the same password as before, for verification.</small>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const registerForm = document.getElementById('register-form');
+                registerForm.addEventListener('submit', function(event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+                    // Submit the form using AJAX to send_otp view
+                    fetch(registerForm.action, {
+                        method: 'POST',
+                        body: new FormData(registerForm),
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Redirect to otp.html after successful registration
+                            window.location.href = '{% url "verify_otp" %}';
+                        } else {
+                            // Handle any errors or display messages
+                            console.error(data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        </script>
+        <div id="clock"></div>
+    </div>
+    <script src="{% static 'js/clock.js' %}"></script>
+    {% include 'footer.html' %}
 </body>
 </html>

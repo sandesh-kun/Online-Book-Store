@@ -13,5 +13,11 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('order-history/', views.order_history, name='order_history'),
     path('order-confirmation/<int:order_id>/', views.order_confirmation, name='order_confirmation'),
-    # Add other app's URL patterns here...
+    path('send-otp/', views.send_otp_email, name='send_otp'),
+    path('otp-verification/', views.verify_otp, name='verify_otp'),
+    path('add_to_wishlist/<int:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('remove_from_wishlist/<int:wishlist_item_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
+    path('wishlist/', views.wishlist, name='wishlist'),
+    path('add_review/<int:book_id>/', views.add_review, name='add_review'),
+    path('book_detail/<int:book_id>/', views.book_detail, name='book_detail'),
 ]

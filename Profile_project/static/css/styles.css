@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation {
+    background-color: #110f1198;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.navigation-list {
+    list-style-type: none;
+    display: flex;
+}
+
+.navigation-item {
+    margin-right: 10px;
+}
+
+.navigation-item-search {
+    margin-left: auto;
+}
+
+.navigation-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation-link:hover {
+    background-color: #555;
+}
+
+.search-form {
+    display: flex;
+}
+
+.search-input {
+    padding: 5px;
+    flex: 1;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ccc;
+}
+
+.search-button {
+    padding: 5px 10px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #0d3310;
+    background-color: #7e833b;
+    cursor: pointer;
+}
+
+.main-heading {
+    text-align: center;
+    margin-top: 20px;
+    font-variant: small-caps;
+}
+
+.book-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-around;
+}
+
+.book-item {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.book-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.book-info {
+    padding: 10px 0;
+}
+
+.book-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 10px; */
+}
+
+.price {
+    margin: 0 3px;
+    font-weight: bold;
+}
+
+.action-button {
+    padding: 3px 9px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.add-button {
+    background-color: green;
+    color: #fff;
+}
+
+.remove-button {
+    background-color: red;
+    color: #fff;
+}

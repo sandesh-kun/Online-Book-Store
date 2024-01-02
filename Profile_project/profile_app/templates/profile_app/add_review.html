@@ -1,0 +1,25 @@
+{% load static %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review</title>
+    <link rel="stylesheet" href="{% static 'css/styless.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <div class="add-review-container">
+        <h1>Add a Review</h1>
+        <form method="post" action="{% url 'add_review' book.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,14 +1,21 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Count
 
 class CustomUser(AbstractUser):
     is_regular_user = models.BooleanField(default=True)
+    otp = models.CharField(max_length=6, blank=True)
+    otp_created_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         # Specify unique related_name attributes for groups and user_permissions
         permissions = [
             ('can_view_customuser', 'Can view custom users'),
         ]
+        
+    def get_order_count(self):
+        return Order.objects.filter(user=self).count()
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
@@ -51,3 +58,20 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+class Wishlist(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.username}'s Wishlist"
+    
+class Review(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    comment = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['user', 'book'] 

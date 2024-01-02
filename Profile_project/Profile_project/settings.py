@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "profile_app",
-    "django_otp",
+    'django_otp',
+    'django_otp.plugins.otp_email',
+    'sass_processor',
+ 
+      
 ]
 
 MIDDLEWARE = [
@@ -54,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # "otp_static.middleware.OTPMiddleware",
 ]
 
 ROOT_URLCONF = "Profile_project.urls"
@@ -68,6 +73,7 @@ TEMPLATES = [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.static",
                 "django.contrib.messages.context_processors.messages",
             ],
         },
@@ -122,7 +128,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -131,6 +137,8 @@ STATICFILES_DIRS = [
     
     
 ]
+
+STATIC_ROOT = 'E:\\web_project\\Profile_project\\static_root\\'
 
 AUTH_USER_MODEL = 'profile_app.CustomUser'
 
@@ -146,3 +154,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'sandeshstone13@gmail.com'
 EMAIL_HOST_PASSWORD = 'ttzvscvhmfgkysub'
 DEFAULT_FROM_EMAIL = 'sandeshstone13@gmail.com'
+
+LOGIN_URL = 'user_login'

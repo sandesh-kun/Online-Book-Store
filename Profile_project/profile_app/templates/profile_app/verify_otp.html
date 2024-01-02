@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <!-- Include your CSS file for styling -->
+    <link rel="stylesheet" href="{% static 'css/verify_otp.css' %}">
+</head>
+<body>
+    <div class="otp-verification">
+        <h1>OTP Verification</h1>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" pattern="\d{6}" title="Please enter a 6-digit numeric OTP." required>
+            <button type="submit">Verify OTP</button>
+        </form>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

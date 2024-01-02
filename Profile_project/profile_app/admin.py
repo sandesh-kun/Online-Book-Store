@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, Cart, Address, Order, CustomUser
+from .models import Book, Cart, Address, Order, CustomUser, Wishlist
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -33,3 +33,8 @@ class CustomUserAdmin(admin.ModelAdmin):
         return obj.is_regular_user
     is_regular_user.boolean = True
     is_regular_user.short_description = 'Regular User'
+
+@admin.register(Wishlist)
+class WishlistAdmin(admin.ModelAdmin):
+    list_display = ('user', 'book')
+    search_fields = ('user__username', 'book__title')

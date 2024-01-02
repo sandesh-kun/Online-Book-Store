@@ -1,102 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Online Book Store</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'register' %}">Register</a></li>
-            <li><a hre<!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Home Page</title>
-                </head>
-                <body>
-                    <nav>
-                        <ul>
-                            <li><a href="{% url 'register' %}">Register</a></li>
-                            <li><a href="{% url 'login' %}">Login</a></li>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li>
-                                <form method="GET" action="{% url 'book_list' %}">
-                                    <input type="text" name="q" placeholder="Search books...">
-                                    <button type="submit">Search</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </nav>
-                    <h1>Welcome to our Online Bookstore!</h1>
-                    <h2>Featured Books</h2>
-                    <ul>
-                        {% for book in books %}
-                        <li>
-                            <a href="#" onclick="toggleDescription('{{ book.id }}')">
-                                <img src="{{ book.image.url }}" alt="{{ book.title }} " style="width: 100px; height: 100px;">
-                            </a>
-                            <div id="description_{{ book.id }}" style="display: none;">
-                                <h3>{{ book.title }} by {{ book.author }}</h3>
-                                <p>NPR {{ book.price }}</p>
-                                <p>{{ book.desc }}</p>
-                            </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                
-                    <script>
-                        function toggleDescription(bookId) {
-                            var description = document.getElementById('description_' + bookId);
-                            if (description.style.display === 'none') {
-                                description.style.display = 'block';
-                            } else {
-                                description.style.display = 'none';
-                            }
-                        }
-                    </script>
-                </body>
-                </html>
-                f="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li>
-                <form method="GET" action="{% url 'book_list' %}">
-                    <input type="text" name="q" placeholder="Search books...">
-                    <button type="submit">Search</button>
+    <nav class="navigation">
+        <ul class="navigation-list">
+            <li class="navigation-item"><a href="{% url 'home' %}" class="navigation-link">Home</a></li>
+            <li class="navigation-item"><a href="{% url 'register' %}" class="navigation-link">Register</a></li>
+            <li class="navigation-item"><a href="{% url 'login' %}" class="navigation-link">Login</a></li>
+            <li class="navigation-item-search">
+                <form method="GET" action="{% url 'book_list' %}" class="search-form">
+                    <input type="text" name="q" placeholder="Search books..." class="search-input">
+                    <button type="submit" class="search-button">Search</button>
                 </form>
             </li>
         </ul>
     </nav>
-    <h1>Welcome to our Online Bookstore!</h1>
-    <h2>Featured Books</h2>
-    <ul>
+    <h1 class="main-heading">Welcome to our Online Bookstore!</h1>
+    <h2 class="sub-heading">Featured Books</h2>
+    <ul class="book-list">
         {% for book in books %}
-        <li>
-            <a href="#" onclick="toggleDescription('{{ book.id }}')">
-                <img src="{{ book.image.url }}" alt="{{ book.title }} " style="width: 100px; height: 100px;">
+        <li class="book-item">
+            <a href="#" onclick="toggleDescription('{{ book.id }}')" class="book-link">
+                <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-image">
             </a>
-            <div id="description_{{ book.id }}" style="display: none;">
-                <h3>{{ book.title }} by {{ book.author }}</h3>
-                <p>NPR {{ book.price }}</p>
-                <p>{{ book.desc }}</p>
+            <div id="description_{{ book.id }}" class="book-description">
+                <h3 class="book-title">{{ book.title }} by {{ book.author }}</h3>
+                <p class="book-price">NPR {{ book.price }}</p>
+                <p class="book-desc">{{ book.desc }}</p>
             </div>
         </li>
         {% endfor %}
     </ul>
 
-    <script>
-        function toggleDescription(bookId) {
-            var description = document.getElementById('description_' + bookId);
-            if (description.style.display === 'none') {
-                description.style.display = 'block';
-            } else {
-                description.style.display = 'none';
-            }
-        }
-    </script>
+    <script src="script.js"></script>
+    {% include 'footer.html' %}
 </body>
 </html>
