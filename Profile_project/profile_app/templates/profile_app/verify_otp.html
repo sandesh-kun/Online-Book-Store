@@ -10,20 +10,24 @@
     <link rel="stylesheet" href="{% static 'css/verify_otp.css' %}">
 </head>
 <body>
-    <div class="otp-verification">
-        <h1>OTP Verification</h1>
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-        <form method="post">
-            {% csrf_token %}
-            <label for="otp">Enter OTP:</label>
-            <input type="text" id="otp" name="otp" pattern="\d{6}" title="Please enter a 6-digit numeric OTP." required>
-            <button type="submit">Verify OTP</button>
-        </form>
+    <div class="content">
+        <div class="otp-verification">
+            <h1>OTP Verification</h1>
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <form method="post">
+                {% csrf_token %}
+                <label for="otp">Enter OTP:</label>
+                <input type="text" id="otp" name="otp" pattern="\d{6}" title="Please enter a 6-digit numeric OTP." required>
+                <button type="submit">Verify OTP</button>
+            </form>
+        </div>
     </div>
-    {% include 'footer.html' %}
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

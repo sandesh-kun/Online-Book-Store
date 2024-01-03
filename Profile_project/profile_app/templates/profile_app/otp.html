@@ -9,36 +9,40 @@
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 <body>
-<div class="login">
-    <div class="login-container">
-        <h1>OTP Verification</h1>
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
+    <div class="content">
+        <div class="login">
+            <div class="login-container">
+                <h1>OTP Verification</h1>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <form id="otp-form" method="post">
+                    {% csrf_token %}
+                    <label for="otp">Enter OTP:</label>
+                    <input type="text" id="otp" name="otp" pattern="\d{6}" title="Please enter a 6-digit numeric OTP." required>
+                    <button type="submit">Verify OTP</button>
+                </form>
             </div>
-        {% endfor %}
-        <form id="otp-form" method="post">
-            {% csrf_token %}
-            <label for="otp">Enter OTP:</label>
-            <input type="text" id="otp" name="otp" pattern="\d{6}" title="Please enter a 6-digit numeric OTP." required>
-            <button type="submit">Verify OTP</button>
-        </form>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const otpForm = document.getElementById('otp-form');
+                const otpInput = document.getElementById('otp');
+
+                otpForm.addEventListener('submit', function(event) {
+                    if (!otpInput.checkValidity()) {
+                        event.preventDefault(); // Prevent form submission
+                        alert('Please enter a 6-digit numeric OTP.');
+                    }
+                });
+            });
+        </script>
     </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const otpForm = document.getElementById('otp-form');
-        const otpInput = document.getElementById('otp');
-
-        otpForm.addEventListener('submit', function(event) {
-            if (!otpInput.checkValidity()) {
-                event.preventDefault(); // Prevent form submission
-                alert('Please enter a 6-digit numeric OTP.');
-            }
-        });
-    });
-</script>
-{% include 'footer.html' %}
+<footer class="footer">
+    {% include 'footer.html' %}
+</footer>
 </body>
 </html>

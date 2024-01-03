@@ -10,20 +10,25 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-    <div class="login">
-        <img src="{% static 'images/login-bg.png' %}" alt="login image" class="login__img">
-        <div class="login-container">
-            <h1>User Login</h1>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Login</button>
-                
-            </form>
-            <div id ="clock"></div>
+    <div class="content">
+        <div class="login">
+            <img src="{% static 'images/login-bg.png' %}" alt="login image" class="login__img">
+            <div class="login-container">
+                <h1>User Login</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+                    <p>Forgot your password? <a href="{% url 'password_reset' %}">Click Here!</a></p>
+                    
+                </form>
+                <div id ="clock"></div>
+            </div>
         </div>
+        <script src="{% static 'js/clock.js' %}"></script>
     </div>
-    <script src="{% static 'js/clock.js' %}"></script>
-    {% include 'footer.html' %}
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

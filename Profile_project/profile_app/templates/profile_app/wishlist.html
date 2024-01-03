@@ -10,22 +10,26 @@
     <link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
 </head>
 <body>
-    <h1>Your Wishlist</h1>
-    <ul>
-        {% for item in wishlist_items %}
-            <li>
-                <div>
-                    <img src="{{ item.book.image.url }}" alt="{{ item.book.title }} Image" class="book-image">
-                </div>
-                <div>
-                    <h3>{{ item.book.title }}</h3>
-                    <p>{{ item.book.desc }}</p>
-                </div>
-            </li>
-        {% empty %}
-            <li>Your wishlist is empty.</li>
-        {% endfor %}
-    </ul>
-    {% include 'footer.html' %}
+    <div class="content">
+        <h1>Your Wishlist</h1>
+        <ul>
+            {% for item in wishlist_items %}
+                <li>
+                    <div>
+                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }} Image" class="book-image">
+                    </div>
+                    <div>
+                        <h3>{{ item.book.title }}</h3>
+                        <p>{{ item.book.desc }}</p>
+                    </div>
+                </li>
+            {% empty %}
+                <li>Your wishlist is empty.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

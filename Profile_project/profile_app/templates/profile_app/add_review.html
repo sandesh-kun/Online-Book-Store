@@ -12,14 +12,20 @@
 
 </head>
 <body>
-    <div class="add-review-container">
-        <h1>Add a Review</h1>
-        <form method="post" action="{% url 'add_review' book.id %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit Review</button>
-        </form>
+    <div class="content">
+        <div class="add-review-container">
+            <h1>Add a Review</h1>
+            <form method="post" action="{% url 'add_review' book.id %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+        
     </div>
-    {% include 'footer.html' %}
+        <footer class="footer">
+            {% include 'footer.html' %}
+        </footer>
+    
 </body>
 </html>

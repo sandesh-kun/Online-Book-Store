@@ -10,34 +10,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="book-details">
-        <h1>{{ book.title }}</h1>
-        <p>by {{ book.author }}</p>
-        <p>{{ book.desc }}</p>
-        <img src="{{ book.image.url }}" alt="{{ book.title }} Image">
+    <div class="content">
+        <div class="book-details">
+            <h1>{{ book.title }}</h1>
+            <p>by {{ book.author }}</p>
+            <p>{{ book.desc }}</p>
+            <img src="{{ book.image.url }}" alt="{{ book.title }} Image">
 
-        <p>Average Rating: {{ average_rating }}</p>
+            <p>Average Rating: {{ average_rating }}</p>
 
-        <h2>Reviews</h2>
-        <ul class="reviews">
-            {% for review in reviews %}
-                <li>{{ review.user.username }} - {{ review.rating }} stars - {{ review.comment }}</li>
-            {% empty %}
-                <li>No reviews yet.</li>
-            {% endfor %}
-        </ul>
+            <h2>Reviews</h2>
+            <ul class="reviews">
+                {% for review in reviews %}
+                    <li>{{ review.user.username }} - {{ review.rating }} stars - {{ review.comment }}</li>
+                {% empty %}
+                    <li>No reviews yet.</li>
+                {% endfor %}
+            </ul>
 
-        {% if user.is_authenticated %}
-            <h2>Add a Review</h2>
-            <form class="add-review-form" method="post" action="{% url 'add_review' book.id %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Submit Review</button>
-            </form>
-        {% else %}
-            <p>Please <a href="{% url 'login' %}">log in</a> to add a review.</p>
-        {% endif %}
+            {% if user.is_authenticated %}
+                <h2>Add a Review</h2>
+                <form class="add-review-form" method="post" action="{% url 'add_review' book.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit Review</button>
+                </form>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to add a review.</p>
+            {% endif %}
+        </div>
     </div>
-    {% include 'footer.html' %}
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Address, Review, CustomUser
+from django.contrib.auth.forms import PasswordResetForm
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -47,3 +48,7 @@ class ReviewForm(forms.ModelForm):
             'rating': 'Rating (1-5)',
             'comment': 'Comment'
         }
+        
+class CustomPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

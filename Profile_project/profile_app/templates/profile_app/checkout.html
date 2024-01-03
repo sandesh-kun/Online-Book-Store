@@ -7,12 +7,16 @@
     <title>Checkout</title>
 </head>
 <body>
-    <h1>Checkout</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Place Order</button>
-    </form>
-    {% include 'footer.html' %}
+    <div class="content">
+        <h1>Checkout</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

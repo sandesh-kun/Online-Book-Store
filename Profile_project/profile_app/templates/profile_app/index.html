@@ -9,37 +9,41 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <nav class="navigation">
-        <ul class="navigation-list">
-            <li class="navigation-item"><a href="{% url 'home' %}" class="navigation-link">Home</a></li>
-            <li class="navigation-item"><a href="{% url 'register' %}" class="navigation-link">Register</a></li>
-            <li class="navigation-item"><a href="{% url 'login' %}" class="navigation-link">Login</a></li>
-            <li class="navigation-item-search">
-                <form method="GET" action="{% url 'book_list' %}" class="search-form">
-                    <input type="text" name="q" placeholder="Search books..." class="search-input">
-                    <button type="submit" class="search-button">Search</button>
-                </form>
+    <div class="content">
+        <nav class="navigation">
+            <ul class="navigation-list">
+                <li class="navigation-item"><a href="{% url 'home' %}" class="navigation-link">Home</a></li>
+                <li class="navigation-item"><a href="{% url 'register' %}" class="navigation-link">Register</a></li>
+                <li class="navigation-item"><a href="{% url 'login' %}" class="navigation-link">Login</a></li>
+                <li class="navigation-item-search">
+                    <form method="GET" action="{% url 'book_list' %}" class="search-form">
+                        <input type="text" name="q" placeholder="Search books..." class="search-input">
+                        <button type="submit" class="search-button">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <h1 class="main-heading">Welcome to our Online Bookstore!</h1>
+        <h2 class="sub-heading">Featured Books</h2>
+        <ul class="book-list">
+            {% for book in books %}
+            <li class="book-item">
+                <a href="#" onclick="toggleDescription('{{ book.id }}')" class="book-link">
+                    <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-image">
+                </a>
+                <div id="description_{{ book.id }}" class="book-description">
+                    <h3 class="book-title">{{ book.title }} by {{ book.author }}</h3>
+                    <p class="book-price">NPR {{ book.price }}</p>
+                    <p class="book-desc">{{ book.desc }}</p>
+                </div>
             </li>
+            {% endfor %}
         </ul>
-    </nav>
-    <h1 class="main-heading">Welcome to our Online Bookstore!</h1>
-    <h2 class="sub-heading">Featured Books</h2>
-    <ul class="book-list">
-        {% for book in books %}
-        <li class="book-item">
-            <a href="#" onclick="toggleDescription('{{ book.id }}')" class="book-link">
-                <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-image">
-            </a>
-            <div id="description_{{ book.id }}" class="book-description">
-                <h3 class="book-title">{{ book.title }} by {{ book.author }}</h3>
-                <p class="book-price">NPR {{ book.price }}</p>
-                <p class="book-desc">{{ book.desc }}</p>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+    </div>
 
     <script src="script.js"></script>
-    {% include 'footer.html' %}
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

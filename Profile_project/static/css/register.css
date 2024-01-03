@@ -98,3 +98,17 @@ button:hover {
     color: #f8f3f3;
     text-shadow: 2px 2px 4px rgba(138, 150, 31, 0.3);
   }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f8f8; /* Adjust as needed */
+    padding: 10px 0; /* Add padding for spacing */
+    text-align: center;
+}
+
+.content {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+}

@@ -7,16 +7,20 @@
     <title>Shopping Cart</title>
 </head>
 <body>
-    <h1>Shopping Cart</h1>
-    <ul>
-        {% for cart_item in cart_items %}
-        <li>{{ cart_item.book.title }} - Quantity: {{ cart_item.quantity }}</li>
-        {% endfor %}
-    </ul>
-    <form action="{% url 'checkout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Place Order</button>
-    </form>
-    {% include 'footer.html' %}
+    <div class="content">
+        <h1>Shopping Cart</h1>
+        <ul>
+            {% for cart_item in cart_items %}
+            <li>{{ cart_item.book.title }} - Quantity: {{ cart_item.quantity }}</li>
+            {% endfor %}
+        </ul>
+        <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

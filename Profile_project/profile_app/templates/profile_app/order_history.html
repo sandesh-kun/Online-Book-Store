@@ -7,12 +7,16 @@
     <title>Order History</title>
 </head>
 <body>
-    <h1>Order History</h1>
-    <ul>
-        {% for order in orders %}
-        <li>Order ID: {{ order.id }} - Total: ${{ order.total }}</li>
-        {% endfor %}
-    </ul>
-    {% include 'footer.html' %}
+    <div class="content">
+        <h1>Order History</h1>
+        <ul>
+            {% for order in orders %}
+            <li>Order ID: {{ order.id }} - Total: ${{ order.total }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer class="footer">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

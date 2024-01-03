@@ -58,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # "django.middleware.debug.DebugMiddleware",
     # "otp_static.middleware.OTPMiddleware",
 ]
 
@@ -151,8 +152,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'syouremail@gmail.com'
-EMAIL_HOST_PASSWORD = 'theheheh'
-DEFAULT_FROM_EMAIL = 'youremail@gmail.com'
+EMAIL_HOST_USER = 'yourmail@gmail.com'
+EMAIL_HOST_PASSWORD = 'jjjjjj'
+DEFAULT_FROM_EMAIL = 'syourmail@gmail.com'
 
 LOGIN_URL = 'user_login'

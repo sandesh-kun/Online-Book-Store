@@ -3,8 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .models import CustomUser, Book, Cart, Address, Order, Wishlist, Review
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, AddressForm, OTPVerificationForm, ReviewForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, AddressForm, OTPVerificationForm, ReviewForm, CustomPasswordResetForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import PasswordResetView
+from django.urls import reverse_lazy
 from django.db.models import Q, Avg, Count
 from django.http import HttpResponseBadRequest
 from django.core.mail import send_mail
@@ -92,22 +94,46 @@ def add_to_cart(request, book_id):
 
     return redirect('view_cart')
 
+# @login_required
+# def remove_from_cart(request, cart_item_id):
+#     # print(type(cart_item_id))
+#     cart_item = Book.objects.get(id = cart_item_id)
+#     cart = Cart.objects.filter(user = request.user, book = cart_item)
+#     # cart.first().delete()
+    
+
+#     if cart.quantity > 1:
+#         # If the quantity is greater than 1, decrease it by 1
+#         cart.quantity -= 1
+#         cart.save()
+#     elif cart_item.quantity == 1:
+#         # If the quantity is 1, remove the item from the cart
+#         cart_item.delete()
+#     else:
+#         # If the quantity is already less than 1, return a bad request response
+#         return HttpResponseBadRequest("Invalid quantity in cart")
+
+#     return redirect('view_cart')
+
 @login_required
 def remove_from_cart(request, cart_item_id):
-    cart_item = get_object_or_404(Cart, pk=cart_item_id, user=request.user)
+    try:
+        cart_item = Book.objects.get(id=cart_item_id)  # Retrieve the book from the cart
+        cart = Cart.objects.get(user=request.user, book=cart_item)  # Retrieve the cart item for the user and book
+    except (Book.DoesNotExist, Cart.DoesNotExist) as e:
+        # Handle the case where either the book or the cart item does not exist
+        return HttpResponseBadRequest("Invalid book or cart item")
 
-    if cart_item.quantity > 1:
+    if cart.quantity > 1:
         # If the quantity is greater than 1, decrease it by 1
-        cart_item.quantity -= 1
-        cart_item.save()
-    elif cart_item.quantity == 1:
-        # If the quantity is 1, remove the item from the cart
-        cart_item.delete()
+        cart.quantity -= 1
+        cart.save()
     else:
-        # If the quantity is already less than 1, return a bad request response
-        return HttpResponseBadRequest("Invalid quantity in cart")
+        # If the quantity is 1 or less, remove the item from the cart
+        cart.delete()
 
     return redirect('view_cart')
+
 
 @login_required
 def view_cart(request):
@@ -225,3 +251,10 @@ def book_detail(request, book_id):
     else:
         average_rating = None
     return render(request, 'profile_app/book_detail.html', {'book': book, 'reviews': reviews, 'average_rating': average_rating})
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'profile_app/password_reset.html'
+    email_template_name = 'profile_app/password_reset_email.html'
+    subject_template_name = 'profile_app/password_reset_subject.txt'
+    success_url = reverse_lazy('password_reset_done')
+    from_email = 'sandeshstone13@gmail.com'

@@ -83,3 +83,18 @@ body {
 .add-review-form a:hover {
     text-decoration: underline;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f8f8; /* Adjust as needed */
+    padding: 10px 0; /* Add padding for spacing */
+    text-align: center;
+}
+
+.content {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+}
