@@ -152,8 +152,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'yourmail@gmail.com'
-EMAIL_HOST_PASSWORD = 'jjjjjj'
-DEFAULT_FROM_EMAIL = 'syourmail@gmail.com'
+EMAIL_HOST_USER = 'sandeshstone13@gmail.com'
+EMAIL_HOST_PASSWORD = 'ttzvscvhmfgkysub'
+DEFAULT_FROM_EMAIL = 'sandeshstone13@gmail.com'
 
 LOGIN_URL = 'user_login'
+
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Replace with your broker URL (e.g., RabbitMQ or Redis)
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Replace with your result backend URL if needed
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'

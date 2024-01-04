@@ -1,7 +1,9 @@
 from django.urls import path
 from .views import CustomPasswordResetView
 from django.contrib.auth import views as auth_views
+# from profile_app.tasks import send_daily_highlighted_book_notification
 from . import views
+from .views import subscribe_to_notifications
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -10,6 +12,7 @@ urlpatterns = [
     path('login/', views.user_login, name='user_login'),
     path('logout/', views.user_logout, name='logout'),
     path('books/', views.book_list, name='book_list'),
+    path('user/profile/', views.user_profile, name='user_profile'),
     path('add-to-cart/<int:book_id>/', views.add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:cart_item_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('view-cart/', views.view_cart, name='view_cart'),
@@ -28,5 +31,6 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('subscribe-to-notifications/', subscribe_to_notifications, name='subscribe_to_notifications'),
 
 ]

@@ -52,3 +52,8 @@ class ReviewForm(forms.ModelForm):
 class CustomPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['subscribe_to_notifications'] 

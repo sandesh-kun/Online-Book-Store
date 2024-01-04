@@ -16,7 +16,9 @@
             <ul class="navigation-list">
                 <li class="navigation-item"><a href="{% url 'logout' %}" class="navigation-link">Logout</a></li>
                 <li class="navigation-item"><a href="{% url 'view_cart' %}" class="navigation-link">View Cart</a></li>
-                <li class="navigation-item"><a href="{% url 'wishlist' %}" class="navigation-link">Wishlist</a></li> <!-- Add link to Wishlist page -->
+                <li class="navigation-item"><a href="{% url 'wishlist' %}" class="navigation-link">Wishlist</a></li>
+                <li class="navigation-item"><a href="{% url 'user_profile' %}" class="navigation-link">Profile</a></li>
+                
                 <li class="navigation-item-search">
                     <form method="GET" action="{% url 'book_list' %}" class="search-form">
                         <input type="text" name="q" placeholder="Search books..." class="search-input">

@@ -16,6 +16,7 @@ class CustomUser(AbstractUser):
         
     def get_order_count(self):
         return Order.objects.filter(user=self).count()
+    subscribe_to_notifications = models.BooleanField(default=False)
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
@@ -24,6 +25,7 @@ class Book(models.Model):
     price = models.IntegerField()
     desc = models.TextField()
     image = models.ImageField(upload_to="books/images", default="")
+    pdf_file = models.FileField(upload_to='pdfs/', null=True, blank=True)
 
     def __str__(self):
         return self.title

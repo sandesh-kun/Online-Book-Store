@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from .models import CustomUser, Book, Cart, Address, Order, Wishlist, Review
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, AddressForm, OTPVerificationForm, ReviewForm, CustomPasswordResetForm
+from .models import CustomUser, Book, Cart, Address, Order, Wishlist, Review    
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, AddressForm, OTPVerificationForm, ReviewForm, CustomPasswordResetForm, UserProfileForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
@@ -12,6 +12,9 @@ from django.http import HttpResponseBadRequest
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
+from datetime import timedelta
+from django.utils import timezone
+from celery import shared_task
 import random
 
 def home(request):
@@ -56,6 +59,18 @@ def user_login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'profile_app/login.html', {'form': form})
+
+@login_required
+def user_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user_profile')  # Redirect to the user profile page after saving the form
+    else:
+        form = UserProfileForm(instance=user)
+    return render(request, 'profile_app/user_profile.html', {'form': form})
 
 @login_required
 def user_logout(request):
@@ -245,12 +260,13 @@ def add_review(request, book_id):
 def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     reviews = Review.objects.filter(book=book)
+    user_has_purchased = True
     # Calculate average rating
     if reviews.exists():
         average_rating = reviews.aggregate(Avg('rating'))['rating__avg']
     else:
         average_rating = None
-    return render(request, 'profile_app/book_detail.html', {'book': book, 'reviews': reviews, 'average_rating': average_rating})
+    return render(request, 'profile_app/book_detail.html', {'book': book, 'reviews': reviews, 'average_rating': average_rating, 'book': book, 'user_has_purchased': user_has_purchased})
 
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'profile_app/password_reset.html'
@@ -258,3 +274,17 @@ class CustomPasswordResetView(PasswordResetView):
     subject_template_name = 'profile_app/password_reset_subject.txt'
     success_url = reverse_lazy('password_reset_done')
     from_email = 'sandeshstone13@gmail.com'
+    
+    
+@login_required
+def subscribe_to_notifications(request):
+    user = request.user
+    if request.method == 'POST':
+        subscribe = request.POST.get('subscribe')
+        if subscribe:
+            user.subscribe_to_notifications = True
+        else:
+            user.subscribe_to_notifications = False
+        user.save()
+    return redirect('user_profile')
+    

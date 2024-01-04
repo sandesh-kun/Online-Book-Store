@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Other head elements -->
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+</head>
+<body>
+    <div class="user-profile">
+        <h2>User Profile</h2>
+        <p>Name: {{ user.username }} {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+    </div>
+    <div class="order-history">
+        <h3>Order History</h3>
+        <ul>
+            {% for order in orders %}
+                <li>{{ order.date }} - Total: {{ order.total }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <form method="post" action="{% url 'subscribe_to_notifications' %}" class="subscription-form">
+        {% csrf_token %}
+        <input type="checkbox" id="subscribe" name="subscribe" {% if user.subscribe_to_notifications %}checked{% endif %}>
+        <label for="subscribe">Subscribe to Notifications</label>
+        <button type="submit">Save</button>
+    </form>
+    <!-- Other body elements -->
+</body>
+</html>
